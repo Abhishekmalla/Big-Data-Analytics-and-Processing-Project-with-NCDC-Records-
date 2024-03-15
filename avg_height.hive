@@ -1,0 +1,17 @@
+! echo; # == avg_height_select;
+
+DROP TABLE IF EXISTS records3;
+
+CREATE TABLE records3 (id STRING, sc INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t';
+
+LOAD DATA LOCAL INPATH '/home/student3/pig/skyceiling_data.txt'
+OVERWRITE INTO TABLE records3;
+
+! echo; # vv avg_height_select;
+SELECT id, avg(sc)
+FROM records3
+WHERE sc!= 99999 
+GROUP BY id;
+! echo; # ^^ avg_height_select;
